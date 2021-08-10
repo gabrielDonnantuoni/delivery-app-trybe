@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import { useGroupState } from '../hooks';
 import { isValidForLogin, request, getPathByRole,
@@ -31,6 +32,20 @@ const useStyles = makeStyles((theme) => ({
     '& > :last-child': {
       marginTop: theme.spacing(0),
       marginBottom: theme.spacing(2),
+    },
+  },
+  logo: {
+    position: 'relative',
+    '& > img': {
+      position: 'relative',
+      top: '0',
+      width: '100%',
+    },
+    '& > h2': {
+      position: 'relative',
+      top: '-130px',
+      fontFamily: 'Style Script',
+      paddingRight: '30px',
     },
   },
 }));
@@ -86,7 +101,10 @@ const LoginForm = () => {
     <>
       <Grid className={ classes.root } item xs={ 11 } sm={ 8 } md={ 6 } lg={ 4 }>
         <Paper component="form" elevation={ 8 } className={ classes.form }>
-          <img src="images/undraw_On_the_way_re_swjt.svg" alt="logo" />
+          <div className={ classes.logo }>
+            <img src="images/7_min_logo.svg" alt="logo" />
+            <Typography variant="h2" align="right">Min.</Typography>
+          </div>
           <TextField
             type="text"
             variant="outlined"

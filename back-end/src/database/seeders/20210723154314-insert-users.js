@@ -25,6 +25,13 @@ module.exports = {
         password: md5('$#zebirita#$'),
         role: 'customer',
       },
+      {
+        id: 4,
+        name: 'admin',
+        email: 'admin@gmail.com',
+        password: md5('123456'),
+        role: 'administrator',
+      },
       ], { timestamps: false });
   },
 

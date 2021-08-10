@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
 
 const UserTable = () => {
   const { oscillator } = useContext(Context);
-  console.log(oscillator);
   const classes = useStyles();
   const [users, setUser] = useState(null);
 
@@ -37,9 +36,6 @@ const UserTable = () => {
     getUsers();
   }, [oscillator.value]);
 
-  console.log(users);
-  console.log(token);
-
   const removeUser = (id) => {
     const options = {
       headers: {
@@ -53,6 +49,7 @@ const UserTable = () => {
 
   const renderBody = () => {
     if (users) {
+      // const withoutAdmin = users.map(({ role }) => role !== 'administrator');
       return (
         <MyTableBody users={ users } removeUser={ removeUser } />);
     }

@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'Style Script';
+  /* src: url('webfont.eot'); IE9 Compat Modes */
+  src: url('./fonts/StyleScript-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

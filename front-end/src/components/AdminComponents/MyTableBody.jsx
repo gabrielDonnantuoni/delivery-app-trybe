@@ -11,6 +11,11 @@ const useStyles = makeStyles((theme) => ({
     '&:nth-of-type(even)': {
       backgroundColor: theme.palette.action.hover,
     },
+    iconButton: {
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
   },
 }));
 
@@ -49,7 +54,10 @@ const MyTableBody = ({ users, removeUser }) => {
             data-testid={ `admin_manage__element-user-table-remove-${index}` }
             align="center"
           >
-            <DeleteIcon onClick={ () => removeUser(user.id) } />
+            <DeleteIcon
+              className={ classes.iconButton }
+              onClick={ () => removeUser(user.id) }
+            />
           </TableCell>
         </TableRow>
       )) }
