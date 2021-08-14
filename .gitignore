@@ -176,8 +176,6 @@ build/Release
 
 # Dependency directories
 node_modules/
-back-end/node_modules
-front-end/node_modules
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -288,16 +286,8 @@ $RECYCLE.BIN/
 .vscode
 .coverage
 
-node_modules
 report-*.log
-.env
-front-end/.env
-back-end/.env
 */**/.env
 **/reports/**/*
 **/coverage
 **/.nyc_output
-
-# package-lock.json
-# front-end/package-lock.json
-# back-end/package-lock.json
