@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { lStorage } from '../../../utils';
 import { OrdersList, NavBar, Loading } from '../../../components';
 
-const userType = 'customer';
+const userType = 'seller';
 
 const Orders = () => {
   const [user, setUser] = useState({});

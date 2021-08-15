@@ -8,11 +8,11 @@ module.exports = async (req, _res, next) => {
 
     const secret = process.env.JWT_SECRET;
     const payload = jwt.verify(token, secret.trim());
-    
+
     const { email, name } = payload.data;
     const user = await userService.isValidUser({ email, name });
     if (!user) return next({ code: 'unauthenticated', message: 'Expired or invalid token' });
-    
+
     req.user = user;
     next();
   } catch (err) {

@@ -10,15 +10,19 @@ function OrdersList({ name, token, userType }) {
 
   useEffect(() => {
     const getSales = async () => {
-      const encodedName = encodeURI(name);
-      const options = {
-        headers: {
-          Authorization: token,
-        },
-        method: 'GET',
-      };
-      const userRequest = await request(`${uri}/${encodedName}`, options);
-      setUser(userRequest);
+      try {
+        const encodedName = encodeURI(name);
+        const options = {
+          headers: {
+            Authorization: token,
+          },
+          method: 'GET',
+        };
+        const userRequest = await request(`${uri}/${encodedName}`, options);
+        setUser(userRequest);
+      } catch (err) {
+        console.error(err);
+      }
     };
     getSales();
   }, [name, token, uri]);

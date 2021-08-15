@@ -1,12 +1,13 @@
 const request = async (route, options = {}) => {
-  if (!options.headers) options.headers = { 'Content-Type': 'application/json' };
-  else options.headers['Content-Type'] = 'application/json';
+  const opts = { ...options };
+  if (!opts.headers) opts.headers = { 'Content-Type': 'application/json' };
+  else opts.headers['Content-Type'] = 'application/json';
 
-  if (options.body) options.body = JSON.stringify(options.body);
+  if (opts.body) opts.body = JSON.stringify(opts.body);
 
-  if (!options.method) options.method = 'GET';
+  if (!opts.method) opts.method = 'GET';
 
-  const resp = await fetch(`/api/${route}`, options);
+  const resp = await fetch(`/api/${route}`, opts);
   const userObj = await resp.json();
   return userObj;
 };

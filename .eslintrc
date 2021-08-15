@@ -1,0 +1,13 @@
+{
+  "extends": ["airbnb"],
+  "globals": {
+    "localStorage": "readonly",
+    "fetch": "readonly"
+  },
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "consistent-return": "off",
+    "object-curly-newline": ["error", { "multiline": true }],
+    "react/jsx-curly-spacing": { "when": "always" }
+  }
+}

@@ -20,15 +20,17 @@ function ProductsList({ refreshCart }) {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { token } = lStorage.user.get();
-      const options = {
-        headers: {
-          Authorization: token,
-        },
-        method: 'GET',
-      };
-      const result = await request('products', options);
-      setProducts(result);
+      try {
+        const { token } = lStorage.user.get();
+        const options = {
+          headers: { Authorization: token },
+          method: 'GET',
+        };
+        const result = await request('products', options);
+        setProducts(result);
+      } catch (err) {
+        console.error(err);
+      }
     };
     if (products.length === 0) getProducts();
   }, [products]);
@@ -40,7 +42,8 @@ function ProductsList({ refreshCart }) {
           key={ product.id }
           product={ product }
           refreshCart={ refreshCart }
-        />)) }
+        />
+      )) }
     </div>
   );
 };

@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     '&:nth-of-type(even)': {
       backgroundColor: theme.palette.action.hover,
     },
-    iconButton: {
-      '&:hover': {
-        cursor: 'pointer',
-      },
+  },
+  iconButton: {
+    '&:hover': {
+      cursor: 'pointer',
     },
   },
 }));
@@ -70,7 +70,7 @@ MyTableBody.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    role: PropTypes.number.isRequired,
+    role: PropTypes.string.isRequired,
   })).isRequired,
 };
 

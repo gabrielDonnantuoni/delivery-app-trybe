@@ -1,11 +1,8 @@
-const moment = require('moment');
 const { Sale } = require('../../database/models');
 
 const getSaleProducts = async (saleId) => {
   const saleWithProducts = await Sale.findOne({
-    where: {
-      id: saleId,
-    },
+    where: { id: saleId },
     include: 'products',
   });
   if (!saleWithProducts) {
@@ -20,7 +17,7 @@ const updateSaleStatus = async (id, updateObj) => {
     return { error: { code: 'notFound', message: 'Ordem não encontrada' } };
   }
   return { result: 'Updated!' };
-}; 
+};
 
 const newSale = async (sale) => {
   const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, productsList } = sale;
@@ -30,7 +27,7 @@ const newSale = async (sale) => {
     totalPrice,
     deliveryAddress,
     deliveryNumber,
-    saleDate: moment().toISOString(),
+    saleDate: new Date(),
     status: 'Pendente',
     productsList,
   });

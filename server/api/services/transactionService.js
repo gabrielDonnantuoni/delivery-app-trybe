@@ -3,12 +3,10 @@ const { Sale, User } = require('../../database/models');
 const findTransactions = async (name, transactionSide) => {
   const userWithTransactions = await User.findOne({
     include: transactionSide,
-    where: {
-      name,
-    },
+    where: { name },
   });
   if (!userWithTransactions) {
-    return { error: { code: 'notFound', message: 'Não existe lista de vendas' } }; 
+    return { error: { code: 'notFound', message: 'Não existe lista de vendas' } };
   }
 
   return { result: userWithTransactions };

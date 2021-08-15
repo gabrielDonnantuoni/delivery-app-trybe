@@ -5,25 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useRouter } from 'next/router';
-import Typography from '@material-ui/core/Typography';
+import Img from 'next/image';
 import { isValidUserForRegistration, request, getPathByRole, lStorage } from '../utils';
 import TransitionAlerts from './TransitionAlerts';
-
-// const useStyles = makeStyles((theme) => ({
-//   selectEmpty: {
-//     marginTop: theme.spacing(2),
-//   },
-//   root: {
-//     display: 'flex',
-//     justifyContent: 'space-around',
-//     flexWrap: 'wrap',
-//     flexDirection: 'column',
-//     '& > *': {
-//       margin: theme.spacing(1),
-//       width: '25ch',
-//     },
-//   },
-// }));
+import logo from '../../public/images/on_the_way.svg';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -74,31 +59,35 @@ export default function Register() {
   };
 
   const handleClick = async (event) => {
-    event.preventDefault();
-    const options = {
-      body: {
-        name,
-        email,
-        password,
-        role: 'customer',
-      },
-      method: 'POST',
-    };
-    const { token, message } = await request('register', options);
-
-    if (!message) {
-      const user = {
-        name,
-        email,
-        role: 'customer',
-        token,
+    try {
+      event.preventDefault();
+      const options = {
+        body: {
+          name,
+          email,
+          password,
+          role: 'customer',
+        },
+        method: 'POST',
       };
-      lStorage.user.set(user);
-      const homePage = getPathByRole(user.role);
-      router.push(homePage);
-    } else {
-      setErrorMessage(message);
-      setOpen(true);
+      const { token, message } = await request('register', options);
+  
+      if (!message) {
+        const user = {
+          name,
+          email,
+          role: 'customer',
+          token,
+        };
+        lStorage.user.set(user);
+        const homePage = getPathByRole(user.role);
+        router.push(homePage);
+      } else {
+        setErrorMessage(message);
+        setOpen(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -115,9 +104,9 @@ export default function Register() {
     <>
       <Grid className={ classes.root } item xs={ 11 } sm={ 8 } md={ 6 } lg={ 4 }>
         <Paper component="form" elevation={ 8 } className={ classes.form }>
-          <Typography variant="h4" gutterBottom align="center">
-            Cadastro
-          </Typography>
+          <div>
+            <Img src={ logo } alt="logo" />
+          </div>
           <TextField
             type="text"
             value={ name }

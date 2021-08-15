@@ -6,7 +6,7 @@ const socket = io();
 
 export const Context = createContext();
 
-const ContextProvider = ({ children }) => {
+function ContextProvider({ children }) {
   const [oscillator, setOscillator] = useState(false);
 
   const obj = {
@@ -14,11 +14,11 @@ const ContextProvider = ({ children }) => {
     oscillator: { value: oscillator, set: setOscillator },
   };
   return (
-    <Context.Provider value={ obj }>
+    <Context.Provider value={obj}>
       { children }
     </Context.Provider>
   );
-};
+}
 
 ContextProvider.propTypes = {
   children: PropTypes.element.isRequired,

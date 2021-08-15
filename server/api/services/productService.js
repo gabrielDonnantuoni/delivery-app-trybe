@@ -5,6 +5,4 @@ const getAllProducts = async () => {
   return { result: products };
 };
 
-module.exports = {
-  getAllProducts,
-};
+module.exports = { getAllProducts };

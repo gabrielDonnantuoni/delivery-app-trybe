@@ -4,11 +4,14 @@ const { Op } = require('sequelize');
 const { User } = require('../../database/models');
 
 const isValidUser = async ({ name, email }) => {
-  const user = await User.findOne({ where: {
-    [Op.or]: [
-      { name },
-      { email },
-    ] } });
+  const user = await User.findOne({
+    where: {
+      [Op.or]: [
+        { name },
+        { email },
+      ],
+    },
+  });
   return user;
 };
 
@@ -35,7 +38,7 @@ const registerByAdmin = async ({ name, email, password, role }) => {
 const validateRegister = async (registerObj) => {
   const user = await isValidUser(registerObj);
   if (user) return { error: { code: 'alreadyExists', message: 'Usuário já possui um cadastro' } };
-  const createdUser = await registerByAdmin(registerObj); 
+  const createdUser = await registerByAdmin(registerObj);
   return { result: createdUser };
 };
 
@@ -56,9 +59,7 @@ const getAllUsers = async () => {
 };
 
 const removeUser = async (id) => {
-  const users = await User.destroy({
-    where: { id },
-   });
+  const users = await User.destroy({ where: { id } });
   return { result: users };
 };
 

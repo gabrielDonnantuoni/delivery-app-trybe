@@ -20,20 +20,20 @@ async function getServer() {
     const app = express();
     const server = http.createServer(app);
     const io = socketio(server);
-    
+
     io.on('connection', (socket) => {
       socketEvents.orders(socket, io);
     });
-    
+
     app.use(express.json());
     app.use(cors());
     app.use('/api', routes, errorHandler);
 
     app.all('*', (req, res) => nextHandler(req, res));
-  
+
     return server;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.error(err);
     process.exit(1);
   }
 }

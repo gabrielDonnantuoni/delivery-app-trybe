@@ -5,8 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { isValidUserForRegistration, lStorage, request } from '../../utils';
 import TransitionAlerts from '../TransitionAlerts';
-import { useGroupState } from '../../hooks';
-import { useMainContext } from '../../hooks';
+import { useGroupState, useMainContext } from '../../hooks';
 
 const useStyles = makeStyles((theme) => ({
   selectEmpty: {
@@ -30,7 +29,9 @@ export default function RegistrationByManager() {
   const classes = useStyles();
   const { oscillator } = useMainContext();
 
-  const { role, name, email, password, isDisabled, message, open } = useGroupState({
+  const {
+    role, name, email, password, isDisabled, message, open,
+  } = useGroupState({
     role: 'seller',
     name: '',
     email: '',
@@ -64,72 +65,76 @@ export default function RegistrationByManager() {
   };
 
   const handleClick = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const admin = lStorage.user.get();
-    const options = {
-      headers: {
-        Authorization: admin.token,
-      },
-      body: {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-        role: role.value,
-      },
-      method: 'POST',
-    };
+      const admin = lStorage.user.get();
+      const options = {
+        headers: {
+          Authorization: admin.token,
+        },
+        body: {
+          name: name.value,
+          email: email.value,
+          password: password.value,
+          role: role.value,
+        },
+        method: 'POST',
+      };
 
-    const userObj = await request('admin', options);
-    if (userObj.message) {
-      message.set({ text: userObj.message, severity: 'warning' });
-    } else {
-      resetFields();
-      oscillator.set(!oscillator.value);
-      message.set({ text: 'Usuário cadastrado com sucesso', severity: 'success' });
+      const userObj = await request('admin', options);
+      if (userObj.message) {
+        message.set({ text: userObj.message, severity: 'warning' });
+      } else {
+        resetFields();
+        oscillator.set(!oscillator.value);
+        message.set({ text: 'Usuário cadastrado com sucesso', severity: 'success' });
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   const renderErrorMessage = () => (
     <TransitionAlerts
-      message={ message.value.text }
-      open={ open }
+      message={message.value.text}
+      open={open}
       testId="admin_manage__element-invalid-register"
-      severity={ message.value.severity }
+      severity={message.value.severity}
     />
   );
 
   return (
     <div>
-      <form className={ classes.root }>
+      <form className={classes.root}>
         <TextField
-          value={ name.value }
-          inputProps={ { 'data-testid': 'admin_manage__input-name' } }
+          value={name.value}
+          inputProps={{ 'data-testid': 'admin_manage__input-name' }}
           label="Nome"
           variant="outlined"
-          onChange={ (event) => handleChange(name.set, event) }
+          onChange={(event) => handleChange(name.set, event)}
         />
         <TextField
-          value={ email.value }
-          inputProps={ { 'data-testid': 'admin_manage__input-email' } }
+          value={email.value}
+          inputProps={{ 'data-testid': 'admin_manage__input-email' }}
           label="Email"
           variant="outlined"
-          onChange={ (event) => handleChange(email.set, event) }
+          onChange={(event) => handleChange(email.set, event)}
         />
         <TextField
           type="password"
-          value={ password.value }
-          inputProps={ { 'data-testid': 'admin_manage__input-password' } }
+          value={password.value}
+          inputProps={{ 'data-testid': 'admin_manage__input-password' }}
           label="Senha"
           variant="outlined"
-          onChange={ (event) => handleChange(password.set, event) }
+          onChange={(event) => handleChange(password.set, event)}
         />
         <Select
-          inputProps={ { 'data-testid': 'admin_manage__select-role' } }
+          inputProps={{ 'data-testid': 'admin_manage__select-role' }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={ role.value }
-          onChange={ (event) => handleChange(role.set, event) }
+          value={role.value}
+          onChange={(event) => handleChange(role.set, event)}
           native
         >
           <option value="seller">Vendedor</option>
@@ -139,8 +144,8 @@ export default function RegistrationByManager() {
           data-testid="admin_manage__button-register"
           variant="contained"
           color="primary"
-          disabled={ isDisabled.value }
-          onClick={ handleClick }
+          disabled={isDisabled.value}
+          onClick={handleClick}
         >
           Cadastrar
         </Button>

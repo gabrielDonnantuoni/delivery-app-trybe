@@ -7,6 +7,4 @@ const getAllProducts = tcw(async (_req, res, next) => {
   res.status(200).json(result);
 });
 
-module.exports = {
-  getAllProducts,
-};
+module.exports = { getAllProducts };

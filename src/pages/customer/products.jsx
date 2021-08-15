@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { NavBar, ProductsList, ProductsCart } from '../../components';
+import React,{ useState, useEffect } from 'react';
+import { NavBar, ProductsList, ProductsCart, Loading } from '../../components';
 import { lStorage } from '../../utils';
 
 const Products = () => {
   const [subtotal, setSubTotal] = useState(0);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    setUser(lStorage.user.get());
+  }, []);
 
   const sumCart = () => {
     const cart = lStorage.cart.get();
@@ -21,15 +26,13 @@ const Products = () => {
     else setSubTotal(sumCart());
   };
 
-  const userFullName = lStorage.user.get().name;
-
-  return (
+  return (!user.token ? <Loading /> : (
     <>
-      <NavBar userType="customer" userName={ userFullName } />
+      <NavBar userType="customer" userName={ user.name } />
       <ProductsCart subtotal={ subtotal } refreshCart={ refreshSubTotal } />
       <ProductsList refreshCart={ refreshSubTotal } />
     </>
-  );
+  ));
 };
 
 export default Products;

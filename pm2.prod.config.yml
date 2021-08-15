@@ -2,11 +2,11 @@ apps:
 - name: delivery-app
   cwd: ./
   script: npm
-  args: "run dev"
+  args: "run start"
   exec_mode: cluster
-  instances: 0
+  instances: 3
   max_restarts: 3
   max_memory_restart: 200M
   watch: true
   env:
-    NODE_ENV: test
+    NODE_ENV: production

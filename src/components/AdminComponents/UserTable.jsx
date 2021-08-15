@@ -22,15 +22,19 @@ function UserTable() {
 
   useEffect(() => {
     const getUsers = async () => {
-      const options = {
-        headers: {
-          Authorization: token,
-        },
-        method: 'GET',
-      };
-      const userRequest = await request('users/all', options);
-      setUser(userRequest);
-    };
+      try {
+        const options = {
+          headers: {
+            Authorization: token,
+          },
+          method: 'GET',
+        };
+        const userRequest = await request('users/all', options);
+        setUser(userRequest);
+      } catch (err) {
+        console.error(err);
+      }
+    }
     getUsers();
   }, [oscillator.value]);
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { getStatusByCode } = require('../utils');
 
 module.exports = (err, _req, res, _next) => {

@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 const getServer = require('./app');
+
 const port = process.env.PORT || 3000;
 
 (async () => {

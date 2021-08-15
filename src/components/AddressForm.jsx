@@ -44,16 +44,20 @@ export default function AddressForm({ itensCheckout }) {
 
   useEffect(() => {
     const getSellers = async () => {
-      const { token } = lStorage.user.get();
-      const options = {
-        headers: {
-          Authorization: token,
-        },
-        method: 'GET',
-      };
-      const result = await request('users', options);
-      setSellers(result);
-      sellerName.set(result[0].name);
+      try {
+        const { token } = lStorage.user.get();
+        const options = {
+          headers: {
+            Authorization: token,
+          },
+          method: 'GET',
+        };
+        const result = await request('users', options);
+        setSellers(result);
+        sellerName.set(result[0].name);
+      } catch (err) {
+        console.error(err);
+      }
     };
     if (sellers.length === 0) getSellers();
   }, [sellers, sellerName]);
@@ -91,29 +95,34 @@ export default function AddressForm({ itensCheckout }) {
   };
 
   const handleClick = async (event) => {
-    event.preventDefault();
-    const { token } = lStorage.user.get();
-    const options = {
-      headers: {
-        Authorization: token,
-      },
-      body: {
-        sellerId: getSellerId(),
-        totalPrice: getTotalPrice(),
-        deliveryAddress: address.value,
-        deliveryNumber: number.value,
-        productsList: itensCheckout,
-      },
-      method: 'POST',
-    };
-    const userObj = await request('sales', options);
-    if (userObj.message) {
-      message.set({ text: userObj.message, severity: 'warning' });
-    } else {
-      const { id } = userObj;
-      router.push(`/customer/orders/${id}`);
-      lStorage.cart.remove();
-      // message.set({ text: 'Usuário cadastrado com sucesso', severity: 'success' });
+    try {
+
+      event.preventDefault();
+      const { token } = lStorage.user.get();
+      const options = {
+        headers: {
+          Authorization: token,
+        },
+        body: {
+          sellerId: getSellerId(),
+          totalPrice: getTotalPrice(),
+          deliveryAddress: address.value,
+          deliveryNumber: number.value,
+          productsList: itensCheckout,
+        },
+        method: 'POST',
+      };
+      const userObj = await request('sales', options);
+      if (userObj.message) {
+        message.set({ text: userObj.message, severity: 'warning' });
+      } else {
+        const { id } = userObj;
+        router.push(`/customer/orders/${id}`);
+        lStorage.cart.remove();
+        // message.set({ text: 'Usuário cadastrado com sucesso', severity: 'success' });
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

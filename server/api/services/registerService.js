@@ -4,12 +4,15 @@ const { Op } = require('sequelize');
 const { User } = require('../../database/models');
 
 const isValidUser = async ({ name, email }) => {
-  const user = await User.findOne({ where: {
-    [Op.or]: [
-      { name },
-      { email },
-    ] } });
-    return user;
+  const user = await User.findOne({
+    where: {
+      [Op.or]: [
+        { name },
+        { email },
+      ],
+    },
+  });
+  return user;
 };
 
 const validateLogin = async (loginObj) => {

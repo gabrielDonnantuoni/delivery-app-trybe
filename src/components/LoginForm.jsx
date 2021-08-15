@@ -5,13 +5,12 @@ import { useRouter } from 'next/router';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import { useGroupState } from '../hooks';
 import { isValidForLogin, request, getPathByRole,
   getUserObjByToken, lStorage } from '../utils';
 import TransitionAlerts from './TransitionAlerts';
-import logo from '../../public/images/7_min_logo.svg';
+import logo from '../../public/images/on_the_way.svg';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -34,20 +33,6 @@ const useStyles = makeStyles((theme) => ({
     '& > :last-child': {
       marginTop: theme.spacing(0),
       marginBottom: theme.spacing(2),
-    },
-  },
-  logo: {
-    position: 'relative',
-    '& > img': {
-      position: 'relative',
-      top: '0',
-      width: '100%',
-    },
-    '& > h2': {
-      position: 'relative',
-      top: '-130px',
-      fontFamily: 'Style Script',
-      paddingRight: '30px',
     },
   },
 }));
@@ -76,22 +61,26 @@ function LoginForm() {
   };
 
   const hadleSubmit = async () => {
-    const options = {
-      body: {
-        email: email.value,
-        password: password.value,
-      },
-      method: 'POST',
-    };
-
-    const { token, message } = await request('login', options);
-
-    if (message) openAlert.set(true);
-    else {
-      const user = getUserObjByToken(token);
-      lStorage.user.set(user);
-      const homePage = getPathByRole(user.role);
-      router.push(homePage);
+    try {
+      const options = {
+        body: {
+          email: email.value,
+          password: password.value,
+        },
+        method: 'POST',
+      };
+  
+      const { token, message } = await request('login', options);
+  
+      if (message) openAlert.set(true);
+      else {
+        const user = getUserObjByToken(token);
+        lStorage.user.set(user);
+        const homePage = getPathByRole(user.role);
+        router.push(homePage);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -103,9 +92,8 @@ function LoginForm() {
     <>
       <Grid className={ classes.root } item xs={ 11 } sm={ 8 } md={ 6 } lg={ 4 }>
         <Paper component="form" elevation={ 8 } className={ classes.form }>
-          <div className={ classes.logo }>
+          <div>
             <Img src={ logo } alt="logo" />
-            <Typography variant="h2" align="right">Min.</Typography>
           </div>
           <TextField
             type="text"

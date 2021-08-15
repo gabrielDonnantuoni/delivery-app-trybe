@@ -8,6 +8,4 @@ const registerUser = tcw(async (req, res, next) => {
   res.status(201).json(result);
 });
 
-module.exports = {
-  registerUser,
-};
+module.exports = { registerUser };

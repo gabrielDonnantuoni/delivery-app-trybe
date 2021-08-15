@@ -5,15 +5,9 @@ import { Register } from '../components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    justifyContent: 'center',
     height: '100vh',
-    flexWrap: 'wrap',
-    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '60ch',
-    },
   },
 }));
 

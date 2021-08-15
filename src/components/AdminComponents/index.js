@@ -3,4 +3,5 @@ import MyTableBody from './MyTableBody';
 
 export {
   MyTableBody,
-  MyTableHead };
+  MyTableHead,
+};

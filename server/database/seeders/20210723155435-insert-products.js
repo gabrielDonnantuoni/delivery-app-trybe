@@ -1,6 +1,5 @@
 module.exports = {
-  // eslint-disable-next-line max-lines-per-function
-  up: async (queryInterface, _Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.bulkInsert('products', [
       {
         id: 1,
@@ -71,7 +70,7 @@ module.exports = {
     ], { timestamps: false });
   },
 
-  down: async (queryInterface, _Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete('products', {});
   },
 };

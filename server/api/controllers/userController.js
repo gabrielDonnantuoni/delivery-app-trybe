@@ -15,19 +15,22 @@ const getUserById = tcw(async (req, res, next) => {
   res.status(200).json(result);
 });
 
-const getAllSellers = tcw(async (_req, res, _next) => {
-  const { result } = await userService.getAllSellers();
+const getAllSellers = tcw(async (_req, res, next) => {
+  const { result, error } = await userService.getAllSellers();
+  if (error) return next(error);
   res.status(200).json(result);
 });
 
-const getAllUsers = tcw(async (_req, res, _next) => {
-  const { result } = await userService.getAllUsers();
+const getAllUsers = tcw(async (_req, res, next) => {
+  const { result, error } = await userService.getAllUsers();
+  if (error) return next(error);
   res.status(200).json(result);
 });
 
-const removeUser = tcw(async (req, res, _next) => {
+const removeUser = tcw(async (req, res, next) => {
   const { id } = req.params;
-  const { result } = await userService.removeUser(id);
+  const { result, error } = await userService.removeUser(id);
+  if (error) return next(error);
   res.status(200).json(result);
 });
 

@@ -1,5 +1,3 @@
 const orders = require('./orders');
 
-module.exports = {
-  orders,
-};
+module.exports = { orders };

@@ -6,17 +6,17 @@ require('dotenv').config({ path: envPath });
 const environment = process.env.NODE_ENV || 'development';
 
 const suffix = {
-  prod: "",
-  production: "",
-  dev: "-dev",
-  development: "-dev",
-  test: "-test",
+  prod: '-prod',
+  production: '-prod',
+  dev: '-dev',
+  development: '-dev',
+  test: '-test',
 };
 
 const options = {
   host: process.env.POSTGRES_HOST || 'postgres',
   port: process.env.POSTGRES_PORT || '3306',
-  database: 
+  database:
     `${process.env.POSTGRES_DB_NAME || 'delivery-app'}${suffix[environment] || suffix.test}`,
   username: process.env.POSTGRES_USER || 'root',
   password: process.env.POSTGRES_PASSWORD || '',
