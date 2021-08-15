@@ -1,9 +1,9 @@
 {
   "name": "delivery-app-nextjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple delivery app with Next.js and Express.js",
   "engines": {
-    "node": ">=14.0.0"
+    "node": "14.x"
   },
   "engineStrict": true,
   "scripts": {
