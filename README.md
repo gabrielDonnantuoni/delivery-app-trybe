@@ -26,6 +26,9 @@ Após entregar o projeto com o grupo, decidi refatorá-lo e adicionar algumas fe
 - [ ] Implementar os tests de unidade.
 - [ ] Implementar os tests de integração.
 
+## Live view
+Você pode ver o resultado atual do app [aqui](https://delivery-app-d.herokuapp.com)
+
 ## Como usar
 Você precisa ter a versão 14+ do Node.js instalada na sua máquina. 
 
