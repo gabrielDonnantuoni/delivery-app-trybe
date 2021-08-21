@@ -20,15 +20,16 @@ Como seu antigo sistema, que era um conjunto de planilhas, já não atende a nec
 ## Proposta Pessoal
 Após entregar o projeto com o grupo, decidi refatorá-lo e adicionar algumas features:
 
-- [x] Implementar o framework Next.js.
-- [x] Utilizar AWS RDS.
-- [ ] Implementar o superset TypeScript.
-- [ ] Implementar os tests de unidade.
-- [ ] Implementar os tests de integração.
+- [x] Implementar o framework Next.js. - Utilizar as vantagens da desempenho da geração de páginas estáticas
+- [x] Utilizar AWS RDS. - Aprender um pouco sobre os serviços da AWS
+- [ ] Implementar o superset TypeScript. - Tipar cógido para facilitar na criação de código limpo e escalável
+- [ ] Implementar os tests de unidade. - Para propiciar escalabilidade mais segura da aplicação.
+- [ ] Implementar os tests de integração. - Também em prol da escalabilidade, mas garantindo o funcionamento em conjunto dos elementos.
 
 ## Live view
 Você pode ver o resultado atual do app [aqui](https://delivery-app-d.herokuapp.com)
 
+**Obs: existe uma incompatibilidade entre o next e a hook useStyle do Material UI que faz com que os components percam a estilização. Isso será consertado em breve**
 ## Como usar
 Você precisa ter a versão 14+ do Node.js instalada na sua máquina. 
 
